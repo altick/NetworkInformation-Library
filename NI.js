@@ -12,7 +12,6 @@ class Nijs{
     this.total_time = 0;
     this.where = _where;
     self = this;
-    this.receiveData();
   }
 
 
