@@ -5,7 +5,8 @@
  *
  * Example usage
  * -------------
- * detectSpeed.startSpeedCheck ('http://myURl',function callback(timings){...});
+ * detectSpeed.startSpeedCheck ('http://myURl',function callback(timings){...},
+                                function onprogress(evt){...});
  *
  * The timing data is returned as follows:
  *
@@ -125,8 +126,8 @@
         root.detectSpeed = previous_detectSpeed;
         return detectSpeed;
     };
-    detectSpeed.startSpeedCheck = function (earl, callback) {
-        var earl = earl || "http://michotastico.github.io/assets/images/space.jpg";
+    detectSpeed.startSpeedCheck = function (earl, callback, onprogress) {
+        var earl = earl || "http://ashanbh.github.io/images/coffee-apple-iphone-laptop.jpg";
         earl = earl + (/\?/.test(earl) ? "&" : "?") + "cacheBuster=" + Date.now();
         var _timings = {};
         var _progress = function (e) {
@@ -154,6 +155,7 @@
         };
         var oReq = new XMLHttpRequest();
         oReq.addEventListener("progress", _progress, false);
+        oReq.onprogress = onprogress || function (evt) {;};
         oReq.onload = _done;
         _timings.start = Date.now();
         oReq.open("GET", earl);
