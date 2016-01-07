@@ -15,9 +15,10 @@ class Nijs{
   }
 
 
-  receiveData(){
+  receiveData(callbackfunction){
     var setData = function(data){
       self.network_info = data;
+      callbackfunction();
     }
     $.getJSON("http://ip-api.com/json/?callback=?&lang=es&fields=262111", setData);
   }
