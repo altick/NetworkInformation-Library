@@ -125,28 +125,7 @@ function NIJS(where){
     self.total_time = _time;
   }
 
-  this.speedTest = function(){
-    //Console logs
-    write("header","Iniciando detección\n");
-    function loadingbar(_where, percentage){
-      var bar = "(";
-      for (var i = 0; i < percentage ; i ++){
-        bar = bar + "|";
-      }
-      for (var i = percentage; i < 100 ; i++){
-        bar = bar + "_";
-      }
-      bar = bar + ")";
-      document.getElementById(_where).innerHTML = bar;
-    }
-    var onprogress = function c(evt){
-      if (evt.lengthComputable)
-      {
-        var percentComplete = (evt.loaded / evt.total)*100;
-        loadingbar("loading",percentComplete);
-      }
-    }
-
+  this.speedTest = function(onprogress){
     detectSpeed.startSpeedCheck(file, this.callback, onprogress);
   }
 }
