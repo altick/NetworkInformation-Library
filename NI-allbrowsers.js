@@ -10,7 +10,7 @@ function NIJS(where){
   this.total_time = 0;
   this.where = where;
 
-  this.receiveData = function(callback){
+  this.receiveData = function(callbackfunction){
     var setData = function(data){
       self.network_info = data;
       callbackfunction();
