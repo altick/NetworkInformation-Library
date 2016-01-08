@@ -1,5 +1,5 @@
 const file = "http://michotastico.github.io/assets/images/space.jpg";
-
+var self = null;
 function write(where, what){
   document.getElementById(where).innerHTML = document.getElementById(where).innerHTML + what;
 }
@@ -9,10 +9,11 @@ function NIJS(where){
   this.network_info = null;
   this.total_time = 0;
   this.where = where;
+  self = this;
 
   this.receiveData = function(callbackfunction){
     var setData = function(data){
-      this.network_info = data;
+      self.network_info = data;
       callbackfunction();
     }
     $.getJSON("http://ip-api.com/json/?callback=?&lang=es&fields=262111", setData);
@@ -110,18 +111,18 @@ function NIJS(where){
   }
 
   this.callback = function(timings){
+    var where = self.where;
     var _time = (timings.end - timings.start)/1000;
     var _MB = timings.dataSizeKB/1000;
     var _speed =  (_MB/_time)*8;
-    var where = this.where;
     write(where,"\nEl proceso demoró " + _time + " segundos utilizando un archivo de " + _MB +" MB");
     write(where,"\nDando así una velocidad de bajada de " + _speed + " Mbps");
     write(where,"\nLatencia : " + timings.latency);
     write(where,"\nLa latencia es equivalente a una conexión del tipo: " + timings.latencySpeedClass.name);
     write(where,"\nThroughput : " + timings.throughput);
     write(where,"\nThroughPut equivalente a una conexión del tipo : " + timings.throughPutSpeedClass.name);
-    this.speed_result = timings;
-    this.total_time = _time;
+    self.speed_result = timings;
+    self.total_time = _time;
   }
 
   this.speedTest = function(){
