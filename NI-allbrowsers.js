@@ -6,7 +6,18 @@ function NIJS(){
   this.network_info = null;
   this.total_time = 0;
   this.current_speed = 0; //Mbps
+  this.latlon_coords = [0, 0];
   self = this;
+
+  this.askLatlon = function(ploting_method){
+    var setLatlon = function(data){
+      ploting_method(data.coords.latitude, data.coords.longitude);
+      self.latlon_coords = [data.coords.latitude, data.coords.longitude];
+    }
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(setLatlon);
+    }
+  }
 
   this.receiveData = function(callbackfunction){
     var setData = function(data){
@@ -37,7 +48,10 @@ function NIJS(){
   }
 
   this.latlon = function(){
-    return [this.network_info.lat, this.network_info.lon];
+    if(this.latlon_coords[0] === 0 && this.latlon_coords[1] === 0){
+      this.latlon_coords = [this.network_info.lat, this.network_info.lon];
+    }
+    return this.latlon_coords;
   }
 
   this.isMobile = function(){
