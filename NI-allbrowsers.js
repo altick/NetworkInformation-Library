@@ -59,11 +59,21 @@ function NIJS(){
     }
 
     this.city = function(){
-      return this.network_info.city;
+      if(this.dataFromGoogle){
+        return this.dataFromGoogle[1];
+      }
+      else{
+        return this.network_info.city;
+      }
     }
 
     this.country = function(){
-      return this.network_info.country;
+      if(this.dataFromGoogle){
+        return this.dataFromGoogle[4];
+      }
+      else{
+        return this.network_info.country;
+      }
     }
 
     this.countryCode = function(){
@@ -102,7 +112,12 @@ function NIJS(){
     }
 
     this.regionName = function(){
-      return this.network_info.regionName;
+      if(this.dataFromGoogle){
+        return this.dataFromGoogle[3];
+      }
+      else{
+        return this.network_info.regionName;
+      }
     }
 
     this.reverseDNS = function(){
