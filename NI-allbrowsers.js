@@ -1,13 +1,13 @@
-const file = "http://michotastico.github.io/assets/images/space.jpg";
 var self = null;
 
-function NIJS(){
+function NIJS(file){
   this.speed_result = null;
   this.network_info = null;
   this.total_time = 0;
   this.current_speed = 0; //Mbps
   this.latlon_coords = [0, 0];
   this.dataFromGoogle = false;
+  this.file = file;
   self = this;
 
   this.fromGoogle = function(lat, lon){
@@ -178,6 +178,6 @@ function NIJS(){
     }
 
     this.speedTest = function(onprogress){
-      detectSpeed.startSpeedCheck(file, this.callback, onprogress);
+      detectSpeed.startSpeedCheck(this.file, this.callback, onprogress);
     }
   }
