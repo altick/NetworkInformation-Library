@@ -5,6 +5,7 @@ function NIJS(){
   this.speed_result = null;
   this.network_info = null;
   this.total_time = 0;
+  this.current_speed = 0; //Mbps
   self = this;
 
   this.receiveData = function(callbackfunction){
@@ -85,9 +86,12 @@ function NIJS(){
   }
 
   this.downloadSpeed = function(){
-    var _MB = this.speed_result.dataSizeKB/1000;
-    var _speed = (_MB/this.total_time)*8;
-    return _speed;
+    if(this.current_speed === 0){
+      var _MB = this.speed_result.dataSizeKB/1000;
+      var _speed = (_MB/this.total_time)*8;
+      this.current_speed = _speed;
+    }
+    return this.current_speed;
   }
 
   this.latency = function(){
