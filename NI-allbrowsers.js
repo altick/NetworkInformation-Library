@@ -108,7 +108,12 @@ function NIJS(){
     }
 
     this.region = function(){
-      return this.network_info.region;
+      if(this.dataFromGoogle){
+        return this.dataFromGoogle[3];
+      }
+      else{
+        return this.network_info.region;
+      }
     }
 
     this.regionName = function(){
