@@ -126,9 +126,6 @@ function NIJS(){
 
   this.callback = function(timings){
     var _time = (timings.end - timings.start)/1000;
-    var _MB = timings.dataSizeKB/1000;
-    var _speed =  (_MB/_time)*8;
-
     self.speed_result = timings;
     self.total_time = _time;
   }
