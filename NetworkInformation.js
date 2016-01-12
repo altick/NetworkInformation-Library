@@ -4,6 +4,8 @@ function NetworkInformation(){
   selfNetwork = this;
   this.googleInformation = null;
   this.ipApiInformation = null;
+  this.currentOs = "Unknown";
+  this.networkType = "Unknown";
   this.coordinates = [0, 0];
 
   this.getGoogleInfo = function(lat, lon){
@@ -198,9 +200,15 @@ function NetworkInformation(){
     else if(/Mac/i.test(device)){
       os = "Mac";
     }
+    else if (this.isMobile()) {
+      os = "Mobile";
+    }
     else{;}
     return os;
   }
+
+  this.currentOs = this.getOS();
+  this.networkType = this.checkConnectionType();
 
 
 }
