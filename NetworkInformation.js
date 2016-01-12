@@ -98,10 +98,6 @@ function NetworkInformation(){
     return this.coordinates;
   }
 
-  this.isMobile = function(){
-    return this.ipApiInformation.mobile;
-  }
-
   this.getOrganization = function(){
     return this.ipApiInformation.org;
   }
@@ -156,6 +152,25 @@ function NetworkInformation(){
 
   this.getTimezone = function(){
     return this.ipApiInformation.timezone;
+  }
+
+  this.isAndroid = function(){
+    return /Android/i.test(navigator.userAgent);
+  }
+
+  this.isMobile = function(){
+    var device = navigator.userAgent;
+    return /Android|BlackBerry|iPhone|iPad|iPod|IEMobile/i.test(device);
+  }
+
+  this.checkConnectionType = function(){
+    var connection =  navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if(connection == undefined){
+      return "Unknown";
+    }
+    else{
+      return connection.type;
+    }
   }
 
 
