@@ -107,7 +107,16 @@ function NetworkInformation(){
   }
 
   this.useProxy = function(){
-    return this.ipApiInformation.proxy;
+    var countryIpAPi = this.ipApiInformation.country;
+    countryIpAPi = (countryIpAPi.toLowerCase()).trim();
+    var countryGoogle = this.googleInformation[4];
+    countryGoogle = (countryGoogle.toLowerCase()).trim();
+    if(countryIpAPi === countryGoogle){
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
   this.getIp = function(){
