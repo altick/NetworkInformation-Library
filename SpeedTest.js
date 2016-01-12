@@ -2,18 +2,18 @@ var selfTest = null;
 
 function SpeedTest(file_url){
   selfTest = this;
-  this.download_result = 0;
-  this.test_time = 1;
+  this.downloadSpeed = 0;
+  this.testTime = 1;
   this.testResult = null;
   this.file = file_url;
 
   this.getDownloadSpeed = function(){
-    if(this.download_result === 0){
+    if(this.downloadSpeed === 0){
       var _MB = this.testResult.dataSizeKB/1000;
-      var _speed = (_MB/this.test_time)*8;
-      this.download_result = _speed;
+      var _speed = (_MB/this.testTime)*8;
+      this.downloadSpeed = _speed;
     }
-    return this.download_result;
+    return this.downloadSpeed;
   }
 
   this.getLatency = function(){
@@ -28,18 +28,22 @@ function SpeedTest(file_url){
     return this.testResult.throughput;
   }
 
-  this.getTthroughputType = function(){
+  this.getThroughputType = function(){
     return this.testResult.throughPutSpeedClass.name;
+  }
+
+  this.getTestTime = function(){
+    return this.testTime;
   }
 
   this.callback = function(timings){
     var _time = (timings.end - timings.start)/1000;
     selfTest.testResult = timings;
-    selfTest.test_time = _time;
+    selfTest.testTime = _time;
     selfTest.getDownloadSpeed();
   }
 
-  this.speedTest = function(onprogress){
+  this.startSpeedTest = function(onprogress){
     detectSpeed.startSpeedCheck(this.file, this.callback, onprogress);
   }
 }
