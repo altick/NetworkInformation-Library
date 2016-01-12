@@ -118,6 +118,9 @@ function NetworkInformation(){
   }
 
   this.useProxy = function(){
+    if(this.googleInformation == null){
+      return false;
+    }
     var countryIpAPi = this.ipApiInformation.country;
     countryIpAPi = (countryIpAPi.toLowerCase()).trim();
     var countryGoogle = this.googleInformation[4];
