@@ -173,5 +173,21 @@ function NetworkInformation(){
     }
   }
 
+  this.getOS = function(){
+    var os = "Unknown";
+    var device = navigator.userAgent;
+    if(/Windows/i.test(device)){
+      os = "Windows";
+    }
+    else if (/Linux/i.test(device)) {
+      os = "Linux";
+    }
+    else if(/Mac/i.test(device)){
+      os = "Mac";
+    }
+    else{;}
+    return os;
+  }
+
 
 }
