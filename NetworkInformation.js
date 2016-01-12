@@ -41,8 +41,13 @@ function NetworkInformation(){
     var failure = function(data){
       tail_method(callbackfunction);
     }
+    var geo_options = {
+      enableHighAccuracy: true,
+      maximumAge        : 10000,
+      timeout           : 17000
+    };
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(success, failure);
+      navigator.geolocation.getCurrentPosition(success, failure, geo_options);
     }
     else{
       tail_method(callbackfunction);
@@ -59,6 +64,14 @@ function NetworkInformation(){
 
   this.setInformation = function(readyMethod){
     this.getHtml5Geolocation(this.getIpApiInformation, readyMethod);
+    setTimeout(function () {
+      if(selfNetwork.googleInformation == null){
+        window.console.log("No hubo confirmación o se declinó.");
+        selfNetwork.getIpApiInformation(readyMethod);
+      }else{
+        window.console.log("Localización exitosa.");
+      }
+    }, 11000);
   }
 
   this.getAS = function(){
