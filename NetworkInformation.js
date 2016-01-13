@@ -68,7 +68,7 @@ function NetworkInformation(){
     getHtml5Geolocation(getIpApiInformation, readyMethod);
 
     setTimeout(function () {
-      if(selfNetwork.googleInformation == null){
+      if(selfNetwork.googleInformation == null && selfNetwork.ipApiInformation == null){
         window.console.log("No hubo confirmación o se declinó.");
         getIpApiInformation(readyMethod);
       }else{
