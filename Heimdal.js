@@ -1,5 +1,6 @@
 var self = null;
-function Heimdal(file){
+function Heimdal(file, server){
+  this.server_url = server || 'http://localhost/';
   self = this;
   this.file = file;
   this.network_info = new NetworkInformation();
@@ -14,8 +15,17 @@ function Heimdal(file){
   }
 
   this.sendData = function(){
-    var data = JSON.stringify(self);
-    console.log(data);
+    var information = JSON.stringify(self);
+    $.ajax({
+      type: 'POST',
+      contentType: "application/json; charset=utf-8",
+      url: this.server_url,
+      data: information,
+      dataType: "json",
+      success: function(resp){
+        console.log("Success");
+      }
+    });
   }
 
   this.getNetworkInfo = function(){
