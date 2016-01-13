@@ -1,10 +1,9 @@
 var self = null;
-function Heimdal(file, server){
+function Heimdal(server){
   this.server_url = server || 'http://localhost/';
   self = this;
-  this.file = file;
   this.network_info = new NetworkInformation();
-  this.speed_test = new SpeedTest(this.file);
+  this.speed_test = new SpeedTest(file);
 
   this.init = function(callbackFunction){
     this.network_info.setInformation(callbackFunction);
