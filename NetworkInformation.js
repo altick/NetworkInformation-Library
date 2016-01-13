@@ -74,7 +74,7 @@ function NetworkInformation(){
       }else{
         window.console.log("Localización exitosa.");
       }
-    }, 11000);
+    }, 18000);
   }
 
   this.getAS = function(){
