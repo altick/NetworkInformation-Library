@@ -5,11 +5,9 @@
 
 
 /**
-* Heimdal - Main class who administrate the use of NetworkInformation
-& SpeedTest classes
+* Heimdal - Main class who administrate the use of NetworkInformation & SpeedTest classes
 * @class Heimdal
-* @classdesc Main class who administrate the use of NetworkInformation
-& SpeedTest classes
+* @classdesc Main class who administrate the use of NetworkInformation & SpeedTest classes
 *
 * @param  {string} file   URL of the file to be used in the SpeedTest
 * @param  {string} server URL of the server where the JSON will be send
