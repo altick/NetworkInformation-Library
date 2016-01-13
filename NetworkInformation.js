@@ -1,7 +1,4 @@
-var selfNetwork = null;
-
 function NetworkInformation(){
-  selfNetwork = this;
   this.googleInformation = null;
   this.ipApiInformation = null;
   this.currentOs = "Unknown";
@@ -13,7 +10,7 @@ function NetworkInformation(){
       var geocoder;
       geocoder = new google.maps.Geocoder();
       var latlng = new google.maps.LatLng(lat, lon);
-
+      var selfNetwork = this;
       geocoder.geocode(
         {'latLng': latlng},
         function(results, status) {
@@ -32,44 +29,48 @@ function NetworkInformation(){
     }
   }
 
-  this.getHtml5Geolocation = function(tail_method, callbackfunction){
-    var success = function(data){
-      selfNetwork.coordinates = [data.coords.latitude, data.coords.longitude];
-      if(selfNetwork.coordinates[0] != 0 && selfNetwork.coordinates[1] != 0){
-        selfNetwork.getGoogleInfo(data.coords.latitude, data.coords.longitude);
-      }
-      tail_method(callbackfunction);
-    }
-    var failure = function(data){
-      tail_method(callbackfunction);
-    }
-    var geo_options = {
-      enableHighAccuracy: true,
-      maximumAge        : 10000,
-      timeout           : 17000
-    };
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(success, failure, geo_options);
-    }
-    else{
-      tail_method(callbackfunction);
-    }
-  }
-
-  this.getIpApiInformation = function(callbackfunction){
-    var setData = function(data){
-      selfNetwork.ipApiInformation = data;
-      callbackfunction();
-    }
-    $.getJSON("http://ip-api.com/json/?callback=?&lang=es&fields=262111", setData);
-  }
-
   this.setInformation = function(readyMethod){
-    this.getHtml5Geolocation(this.getIpApiInformation, readyMethod);
+    var selfNetwork = this;
+
+    getHtml5Geolocation = function(tail_method, callbackfunction){
+      var success = function(data){
+        selfNetwork.coordinates = [data.coords.latitude, data.coords.longitude];
+        if(selfNetwork.coordinates[0] != 0 && selfNetwork.coordinates[1] != 0){
+          selfNetwork.getGoogleInfo(data.coords.latitude, data.coords.longitude);
+        }
+        tail_method(callbackfunction);
+      }
+      var failure = function(data){
+        tail_method(callbackfunction);
+      }
+      var geo_options = {
+        enableHighAccuracy: true,
+        maximumAge        : 10000,
+        timeout           : 17000
+      };
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(success, failure, geo_options);
+      }
+      else{
+        tail_method(callbackfunction);
+      }
+    }
+
+    getIpApiInformation = function(callbackfunction){
+      var setData = function(data){
+        selfNetwork.ipApiInformation = data;
+        callbackfunction();
+      }
+      $.getJSON("http://ip-api.com/json/?callback=?&lang=es&fields=262111", setData);
+    }
+
+
+    getHtml5Geolocation(getIpApiInformation, readyMethod);
+
     setTimeout(function () {
       if(selfNetwork.googleInformation == null){
         window.console.log("No hubo confirmación o se declinó.");
-        selfNetwork.getIpApiInformation(readyMethod);
+        getIpApiInformation(readyMethod);
       }else{
         window.console.log("Localización exitosa.");
       }
