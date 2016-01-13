@@ -5,7 +5,7 @@
 
 /**
  * SpeedTest - Class in charge of make Speed Tests
- * @class speed_test
+ * @class SpeedTest
  * @classdesc Class in charge of make Speed Tests
  *
  * @param  {string} file_url URL of the file used in the download speed test
@@ -19,6 +19,7 @@ function SpeedTest(file_url){
   /**
    * getDownloadSpeed - Get the download speed
    *
+   * @memberof! SpeedTest
    * @return {number}  download speed
    */
   this.getDownloadSpeed = function(){
@@ -33,6 +34,7 @@ function SpeedTest(file_url){
   /**
    * getLatency - Get the latency
    *
+   * @memberof! SpeedTest
    * @return {number}  latency
    */
   this.getLatency = function(){
@@ -42,6 +44,7 @@ function SpeedTest(file_url){
   /**
    * getLatencyType - Get the equivalence of latency
    *
+   * @memberof! SpeedTest
    * @return {string}  Latency speed class name
    */
   this.getLatencyType = function(){
@@ -51,6 +54,7 @@ function SpeedTest(file_url){
   /**
    * getThroughput - Get the throughput
    *
+   * @memberof! SpeedTest
    * @return {number}  throughput
    */
   this.getThroughput = function(){
@@ -60,6 +64,7 @@ function SpeedTest(file_url){
   /**
    * getThroughputType - Get the equivalenceof throughput
    *
+   * @memberof! SpeedTest
    * @return {string}  Throughput speed class name
    */
   this.getThroughputType = function(){
@@ -69,6 +74,7 @@ function SpeedTest(file_url){
   /**
    * getTestTime - Get the total time of the test
    *
+   * @memberof! SpeedTest
    * @return {number}  duration of test
    */
   this.getTestTime = function(){
@@ -78,8 +84,9 @@ function SpeedTest(file_url){
   /**
    * startSpeedTest - start the speed test
    *
+   * @memberof! SpeedTest
    * @param  {function} onprogress on progress function
-   * @return {undefined} 
+   * @return {undefined}
    */
   this.startSpeedTest = function(onprogress){
     var selfTest = this;

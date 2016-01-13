@@ -22,6 +22,7 @@ function Heimdal(file, server){
   * init - Call to NetworkInformation to init his params and execute the
   * callback function
   *
+  * @memberof! Heimdal
   * @param  {function} callback function when the network information was ready
   * @return {undefined}
   */
@@ -33,6 +34,7 @@ function Heimdal(file, server){
   /**
    * runTest - Start the Speed test
    *
+   * @memberof! Heimdal
    * @param  {function} on progress function. For loading stuff
    * @return {undefined}
    */
@@ -44,6 +46,7 @@ function Heimdal(file, server){
   /**
    * sendData - Send all the data to the server
    *
+   * @memberof! Heimdal
    * @return {undefined}
    */
   this.sendData = function(){
@@ -64,6 +67,7 @@ function Heimdal(file, server){
   /**
    * getNetworkInfo - Return the NetworkInformation object
    *
+   * @memberof! Heimdal
    * @return {NetworkInformation}  Inner NetworkInformation object
    */
   this.getNetworkInfo = function(){
@@ -72,7 +76,7 @@ function Heimdal(file, server){
 
   /**
    * getSpeedTest - Return the SpeedTest object
-   *
+   * @memberof! Heimdal
    * @return {SpeedTest}  Inner SpeedTest object
    */
   this.getSpeedTest = function(){

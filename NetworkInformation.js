@@ -20,6 +20,7 @@ function NetworkInformation(){
   /**
    * getGoogleInfo - receive the data from google and set in the internal vars
    *
+   * @memberof! NetworkInformation
    * @param  {number} lat latitude
    * @param  {number} lon longitude
    * @return {undefined}
@@ -51,6 +52,7 @@ function NetworkInformation(){
   /**
    * setInformation - Set all the information to the class. Requesting to the navigator, google and ip-api
    *
+   * @memberof! NetworkInformation
    * @param  {function} readyMethod function called when the information was setted
    * @return {undefined}
    */
@@ -123,6 +125,7 @@ function NetworkInformation(){
   /**
    * getAS - Get Autonomous system
    *
+   * @memberof! NetworkInformation
    * @return {string}  Autonomous system
    */
   this.getAS = function(){
@@ -132,6 +135,7 @@ function NetworkInformation(){
   /**
    * getCity - Get city
    *
+   * @memberof! NetworkInformation
    * @return {string}  city
    */
   this.getCity = function(){
@@ -146,6 +150,7 @@ function NetworkInformation(){
   /**
    * getCountry - Get country
    *
+   * @memberof! NetworkInformation
    * @return {string} country
    */
   this.getCountry = function(){
@@ -160,6 +165,7 @@ function NetworkInformation(){
   /**
    * getCountryCode - Get country code
    *
+   * @memberof! NetworkInformation
    * @return {string} country code
    */
   this.getCountryCode = function(){
@@ -169,6 +175,7 @@ function NetworkInformation(){
   /**
    * getIsp - Get the ISP
    *
+   * @memberof! NetworkInformation
    * @return {string} ISP
    */
   this.getIsp = function(){
@@ -178,6 +185,7 @@ function NetworkInformation(){
   /**
    * getCoordinates - Get Latlong of client.
    *
+   * @memberof! NetworkInformation
    * @return {Array}  [Latitude, Longitude]
    */
   this.getCoordinates = function(){
@@ -190,6 +198,7 @@ function NetworkInformation(){
   /**
    * getOrganization - Get organization (or ISP if didn't exists)
    *
+   * @memberof! NetworkInformation
    * @return {string}  organization
    */
   this.getOrganization = function(){
@@ -199,6 +208,7 @@ function NetworkInformation(){
   /**
    * useProxy - Check if the user use a proxy
    *
+   * @memberof! NetworkInformation
    * @return {boolean} True if the user use a proxy
    */
   this.useProxy = function(){
@@ -220,6 +230,7 @@ function NetworkInformation(){
   /**
    * getIp - Get IP
    *
+   * @memberof! NetworkInformation
    * @return {string}  IP
    */
   this.getIp = function(){
@@ -229,6 +240,7 @@ function NetworkInformation(){
   /**
    * getRegion - Get region
    *
+   * @memberof! NetworkInformation
    * @return {string}  Region
    */
   this.getRegion = function(){
@@ -243,6 +255,7 @@ function NetworkInformation(){
   /**
    * getRegionName - Get region's name
    *
+   * @memberof! NetworkInformation
    * @return {string}  Region's name
    */
   this.getRegionName = function(){
@@ -257,6 +270,7 @@ function NetworkInformation(){
   /**
    * getReverseDNS - Get the reverse of the DNS
    *
+   * @memberof! NetworkInformation
    * @return {string}  Reverse of the DNS
    */
   this.getReverseDNS = function(){
@@ -266,6 +280,7 @@ function NetworkInformation(){
   /**
    * isSuccessful - Check if the connection was successful
    *
+   * @memberof! NetworkInformation
    * @return {boolean}  True if the connection was successful
    */
   this.isSuccessful = function(){
@@ -280,6 +295,7 @@ function NetworkInformation(){
   /**
    * getTimezone - Get timezone
    *
+   * @memberof! NetworkInformation
    * @return {string} Timezone
    */
   this.getTimezone = function(){
@@ -289,6 +305,7 @@ function NetworkInformation(){
   /**
    * isAndroid - Check if the device is Android
    *
+   * @memberof! NetworkInformation
    * @return {boolean} True if the device is Android
    */
   this.isAndroid = function(){
@@ -298,6 +315,7 @@ function NetworkInformation(){
     /**
      * isMobile - Check if the device is mobile
      *
+     * @memberof! NetworkInformation
      * @return {boolean} True if the device is mobile
      */
   this.isMobile = function(){
@@ -308,6 +326,7 @@ function NetworkInformation(){
     /**
      * checkConnectionType - If its avalaible, check the connection type. (Only work on Android)
      *
+     * @memberof! NetworkInformation
      * @return {string}  Connection Type
      */
   this.checkConnectionType = function(){
@@ -323,6 +342,7 @@ function NetworkInformation(){
     /**
      * getOS - Get the OS of the client
      *
+     * @memberof! NetworkInformation
      * @return {string}  Operative System
      */
   this.getOS = function(){
