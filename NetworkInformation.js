@@ -1,6 +1,8 @@
 /**
-* @author Michel Llorens http://michotastico.github.io
+* @file Class who collect client network information using two different API for precision.
+* @author [Michel Llorens]{@link http://michotastico.github.io}
 * @version 1.0.0
+* @license MIT
 */
 
 

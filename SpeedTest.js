@@ -1,6 +1,8 @@
 /**
-* @author Michel Llorens http://michotastico.github.io
+* @file Class who make download speed test using an specific file.
+* @author [Michel Llorens]{@link http://michotastico.github.io}
 * @version 1.0.0
+* @license MIT
 */
 
 /**

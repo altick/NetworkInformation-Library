@@ -1,6 +1,8 @@
 /**
-* @author Michel Llorens http://michotastico.github.io
+* @file Class who use {@link NetworkInformation} and {@link SpeedTest} to collect and analyse client network data.
+* @author [Michel Llorens]{@link http://michotastico.github.io}
 * @version 1.0.0
+* @license MIT
 */
 
 
