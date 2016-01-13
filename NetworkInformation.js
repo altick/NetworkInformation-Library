@@ -1,3 +1,15 @@
+/**
+* @author Michel Llorens http://michotastico.github.io
+* @version 1.0.0
+*/
+
+
+/**
+ * NetworkInformation - Class who get the information of the client network
+ * @class NetworkInformation
+ * @classdesc Class who get the information of the client network
+ *
+ */
 function NetworkInformation(){
   this.googleInformation = null;
   this.ipApiInformation = null;
@@ -5,6 +17,13 @@ function NetworkInformation(){
   this.networkType = "Unknown";
   this.coordinates = [0, 0];
 
+  /**
+   * getGoogleInfo - receive the data from google and set in the internal vars
+   *
+   * @param  {number} lat latitude
+   * @param  {number} lon longitude
+   * @return {undefined}
+   */
   this.getGoogleInfo = function(lat, lon){
     try{
       var geocoder;
@@ -29,9 +48,22 @@ function NetworkInformation(){
     }
   }
 
+  /**
+   * setInformation - Set all the information to the class. Requesting to the navigator, google and ip-api
+   *
+   * @param  {function} readyMethod function called when the information was setted
+   * @return {undefined}
+   */
   this.setInformation = function(readyMethod){
     var selfNetwork = this;
 
+    /**
+     * getHtml5Geolocation - get the geolocalitation from the navigator
+     *
+     * @param  {function} tail_method      next function to be called.
+     * @param  {function} callbackfunction callback function
+     * @return {undefined}
+     */
     getHtml5Geolocation = function(tail_method, callbackfunction){
       var success = function(data){
         selfNetwork.coordinates = [data.coords.latitude, data.coords.longitude];
@@ -56,6 +88,12 @@ function NetworkInformation(){
       }
     }
 
+    /**
+     * getIpApiInformation - get the network information from ip-api
+     *
+     * @param  {function} callbackfunction callback function
+     * @return {undefined}
+     */
     getIpApiInformation = function(callbackfunction){
       var setData = function(data){
         selfNetwork.ipApiInformation = data;
@@ -67,6 +105,11 @@ function NetworkInformation(){
 
     getHtml5Geolocation(getIpApiInformation, readyMethod);
 
+    /**
+     * anonymous function - Timeout to call getIpApiInformation function because a bug in navigator.geolocation.getCurrentPosition method
+     *
+     * @return {undefined}
+     */
     setTimeout(function () {
       if(selfNetwork.googleInformation == null && selfNetwork.ipApiInformation == null){
         window.console.log("No hubo confirmación o se declinó.");
@@ -77,10 +120,20 @@ function NetworkInformation(){
     }, 18000);
   }
 
+  /**
+   * getAS - Get Autonomous system
+   *
+   * @return {string}  Autonomous system
+   */
   this.getAS = function(){
     return this.ipApiInformation.as;
   }
 
+  /**
+   * getCity - Get city
+   *
+   * @return {string}  city
+   */
   this.getCity = function(){
     if(this.googleInformation){
       return this.googleInformation[1];
@@ -90,6 +143,11 @@ function NetworkInformation(){
     }
   }
 
+  /**
+   * getCountry - Get country
+   *
+   * @return {string} country
+   */
   this.getCountry = function(){
     if(this.googleInformation){
       return this.googleInformation[4];
@@ -99,14 +157,29 @@ function NetworkInformation(){
     }
   }
 
+  /**
+   * getCountryCode - Get country code
+   *
+   * @return {string} country code
+   */
   this.getCountryCode = function(){
     return this.ipApiInformation.countryCode;
   }
 
+  /**
+   * getIsp - Get the ISP
+   *
+   * @return {string} ISP
+   */
   this.getIsp = function(){
     return this.ipApiInformation.isp;
   }
 
+  /**
+   * getCoordinates - Get Latlong of client.
+   *
+   * @return {Array}  [Latitude, Longitude]
+   */
   this.getCoordinates = function(){
     if(this.coordinates[0] === 0 && this.coordinates[1] === 0){
       this.coordinates = [this.ipApiInformation.lat, this.ipApiInformation.lon];
@@ -114,10 +187,20 @@ function NetworkInformation(){
     return this.coordinates;
   }
 
+  /**
+   * getOrganization - Get organization (or ISP if didn't exists)
+   *
+   * @return {string}  organization
+   */
   this.getOrganization = function(){
     return this.ipApiInformation.org;
   }
 
+  /**
+   * useProxy - Check if the user use a proxy
+   *
+   * @return {boolean} True if the user use a proxy
+   */
   this.useProxy = function(){
     if(this.googleInformation == null){
       return false;
@@ -134,10 +217,20 @@ function NetworkInformation(){
     }
   }
 
+  /**
+   * getIp - Get IP
+   *
+   * @return {string}  IP
+   */
   this.getIp = function(){
     return this.ipApiInformation.query;
   }
 
+  /**
+   * getRegion - Get region
+   *
+   * @return {string}  Region
+   */
   this.getRegion = function(){
     if(this.googleInformation){
       return this.googleInformation[3];
@@ -147,6 +240,11 @@ function NetworkInformation(){
     }
   }
 
+  /**
+   * getRegionName - Get region's name
+   *
+   * @return {string}  Region's name
+   */
   this.getRegionName = function(){
     if(this.googleInformation){
       return this.googleInformation[3];
@@ -156,10 +254,20 @@ function NetworkInformation(){
     }
   }
 
+  /**
+   * getReverseDNS - Get the reverse of the DNS
+   *
+   * @return {string}  Reverse of the DNS
+   */
   this.getReverseDNS = function(){
     return this.ipApiInformation.reverse;
   }
 
+  /**
+   * isSuccessful - Check if the connection was successful
+   *
+   * @return {boolean}  True if the connection was successful
+   */
   this.isSuccessful = function(){
     if(this.ipApiInformation.status == "success"){
       return true;
@@ -169,19 +277,39 @@ function NetworkInformation(){
     }
   }
 
+  /**
+   * getTimezone - Get timezone
+   *
+   * @return {string} Timezone
+   */
   this.getTimezone = function(){
     return this.ipApiInformation.timezone;
   }
 
+  /**
+   * isAndroid - Check if the device is Android
+   *
+   * @return {boolean} True if the device is Android
+   */
   this.isAndroid = function(){
     return /Android/i.test(navigator.userAgent);
   }
 
+    /**
+     * isMobile - Check if the device is mobile
+     *
+     * @return {boolean} True if the device is mobile
+     */
   this.isMobile = function(){
     var device = navigator.userAgent;
     return /Android|BlackBerry|iPhone|iPad|iPod|IEMobile/i.test(device);
   }
 
+    /**
+     * checkConnectionType - If its avalaible, check the connection type. (Only work on Android)
+     *
+     * @return {string}  Connection Type
+     */
   this.checkConnectionType = function(){
     var connection =  navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     if(connection == undefined){
@@ -192,6 +320,11 @@ function NetworkInformation(){
     }
   }
 
+    /**
+     * getOS - Get the OS of the client
+     *
+     * @return {string}  Operative System
+     */
   this.getOS = function(){
     var os = "Unknown";
     var device = navigator.userAgent;
