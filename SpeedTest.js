@@ -1,7 +1,4 @@
-var selfTest = null;
-
 function SpeedTest(file_url){
-  selfTest = this;
   this.downloadSpeed = 0;
   this.testTime = 1;
   this.testResult = null;
@@ -36,14 +33,14 @@ function SpeedTest(file_url){
     return this.testTime;
   }
 
-  this.callback = function(timings){
-    var _time = (timings.end - timings.start)/1000;
-    selfTest.testResult = timings;
-    selfTest.testTime = _time;
-    selfTest.getDownloadSpeed();
-  }
-
   this.startSpeedTest = function(onprogress){
-    detectSpeed.startSpeedCheck(this.file, this.callback, onprogress);
+    var selfTest = this;
+    callback = function(timings){
+      var _time = (timings.end - timings.start)/1000;
+      selfTest.testResult = timings;
+      selfTest.testTime = _time;
+      selfTest.getDownloadSpeed();
+    }
+    detectSpeed.startSpeedCheck(this.file, callback, onprogress);
   }
 }
