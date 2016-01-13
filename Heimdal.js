@@ -1,7 +1,6 @@
-var self = null;
+
 function Heimdal(file, server){
   this.server_url = server || 'http://localhost/';
-  self = this;
   this.network_info = new NetworkInformation();
   this.speed_test = new SpeedTest(file);
 
@@ -14,7 +13,7 @@ function Heimdal(file, server){
   }
 
   this.sendData = function(){
-    var information = JSON.stringify(self);
+    var information = JSON.stringify(this);
     $.ajax({
       type: 'POST',
       contentType: "application/json; charset=utf-8",
