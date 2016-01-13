@@ -1,5 +1,5 @@
 var self = null;
-function Heimdal(server){
+function Heimdal(file, server){
   this.server_url = server || 'http://localhost/';
   self = this;
   this.network_info = new NetworkInformation();
