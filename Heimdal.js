@@ -11,13 +11,12 @@
 * @class Heimdal
 * @classdesc Main class who administrate the use of NetworkInformation & SpeedTest classes
 *
-* @param  {string} file   URL of the file to be used in the SpeedTest
 * @param  {string} server URL of the server where the JSON will be send
 */
-function Heimdal(file, server){
+function Heimdal(server){
   this.server_url = server || 'http://localhost/';
   this.network_info = new NetworkInformation();
-  this.speed_test = new SpeedTest(file);
+  this.speed_test = [];
 
 
   /**
@@ -38,10 +37,13 @@ function Heimdal(file, server){
    *
    * @memberof! Heimdal
    * @param  {function} on progress function. For loading stuff
+   * @param  {file} file used in the test
    * @return {undefined}
    */
-  this.runTest = function(onProgressFunction){
-    this.speed_test.startSpeedTest(onProgressFunction);
+  this.runTest = function(onProgressFunction, file){
+    var speed_test = new SpeedTest(file);
+    this.speed_test.push(speed_test);
+    speed_test.startSpeedTest(onProgressFunction);
   }
 
 
@@ -77,11 +79,11 @@ function Heimdal(file, server){
   }
 
   /**
-   * getSpeedTest - Return the SpeedTest object
+   * getSpeedTests - Return the SpeedTest object
    * @memberof! Heimdal
    * @return {SpeedTest}  Inner SpeedTest object
    */
-  this.getSpeedTest = function(){
+  this.getSpeedTests = function(){
     return this.speed_test;
   }
 
