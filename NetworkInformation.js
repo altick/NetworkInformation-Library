@@ -296,7 +296,9 @@ function NetworkInformation(){
   }
 
   /**
-  * getTimezone - Get timezonedocument.getElementById('result').innerHTML += "<br/> THERE WAS A TIMEOUT ERROR <br/>";
+  * getTimezone - Get timezone
+  *
+  * @memberof! NetworkInformation
   * @return {string} Timezone
   */
   this.getTimezone = function(){
