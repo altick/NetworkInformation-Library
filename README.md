@@ -26,21 +26,20 @@ Main class who administrate the use of NetworkInformation & SpeedTest classes
 **Kind**: global class  
 
 * [Heimdal](#Heimdal)
-    * [new Heimdal(file, server)](#new_Heimdal_new)
+    * [new Heimdal(server)](#new_Heimdal_new)
     * [.init(callback)](#Heimdal.init) ⇒ <code>undefined</code>
-    * [.runTest(on)](#Heimdal.runTest) ⇒ <code>undefined</code>
+    * [.runTest(on, file)](#Heimdal.runTest) ⇒ <code>undefined</code>
     * [.sendData()](#Heimdal.sendData) ⇒ <code>undefined</code>
     * [.getNetworkInfo()](#Heimdal.getNetworkInfo) ⇒ <code>[NetworkInformation](#NetworkInformation)</code>
-    * [.getSpeedTest()](#Heimdal.getSpeedTest) ⇒ <code>[SpeedTest](#SpeedTest)</code>
+    * [.getSpeedTests()](#Heimdal.getSpeedTests) ⇒ <code>[SpeedTest](#SpeedTest)</code>
 
 <a name="new_Heimdal_new"></a>
-### new Heimdal(file, server)
+### new Heimdal(server)
 Heimdal - Main class who administrate the use of NetworkInformation & SpeedTest classes
 
 
 | Param | Type | Description |
 | --- | --- | --- |
-| file | <code>string</code> | URL of the file to be used in the SpeedTest |
 | server | <code>string</code> | URL of the server where the JSON will be send |
 
 <a name="Heimdal.init"></a>
@@ -55,7 +54,7 @@ callback function
 | callback | <code>function</code> | function when the network information was ready |
 
 <a name="Heimdal.runTest"></a>
-### Heimdal.runTest(on) ⇒ <code>undefined</code>
+### Heimdal.runTest(on, file) ⇒ <code>undefined</code>
 runTest - Start the Speed test
 
 **Kind**: static method of <code>[Heimdal](#Heimdal)</code>  
@@ -63,6 +62,7 @@ runTest - Start the Speed test
 | Param | Type | Description |
 | --- | --- | --- |
 | on | <code>function</code> | progress function. For loading stuff |
+| file | <code>file</code> | used in the test |
 
 <a name="Heimdal.sendData"></a>
 ### Heimdal.sendData() ⇒ <code>undefined</code>
@@ -75,9 +75,9 @@ getNetworkInfo - Return the NetworkInformation object
 
 **Kind**: static method of <code>[Heimdal](#Heimdal)</code>  
 **Returns**: <code>[NetworkInformation](#NetworkInformation)</code> - Inner NetworkInformation object  
-<a name="Heimdal.getSpeedTest"></a>
-### Heimdal.getSpeedTest() ⇒ <code>[SpeedTest](#SpeedTest)</code>
-getSpeedTest - Return the SpeedTest object
+<a name="Heimdal.getSpeedTests"></a>
+### Heimdal.getSpeedTests() ⇒ <code>[SpeedTest](#SpeedTest)</code>
+getSpeedTests - Return the SpeedTest object
 
 **Kind**: static method of <code>[Heimdal](#Heimdal)</code>  
 **Returns**: <code>[SpeedTest](#SpeedTest)</code> - Inner SpeedTest object  
@@ -111,6 +111,7 @@ Class who get the information of the client network
     * [.isMobile()](#NetworkInformation.isMobile) ⇒ <code>boolean</code>
     * [.checkConnectionType()](#NetworkInformation.checkConnectionType) ⇒ <code>string</code>
     * [.getOS()](#NetworkInformation.getOS) ⇒ <code>string</code>
+    * [.ping(url)](#NetworkInformation.ping) ⇒ <code>undefined</code>
 
 <a name="new_NetworkInformation_new"></a>
 ### new NetworkInformation()
@@ -271,6 +272,16 @@ getOS - Get the OS of the client
 
 **Kind**: static method of <code>[NetworkInformation](#NetworkInformation)</code>  
 **Returns**: <code>string</code> - Operative System  
+<a name="NetworkInformation.ping"></a>
+### NetworkInformation.ping(url) ⇒ <code>undefined</code>
+ping - ping to a url. WARNING: THIS REQUIRED A SERVER TO CHECK IF A URL REALLY EXISTS.
+
+**Kind**: static method of <code>[NetworkInformation](#NetworkInformation)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| url | <code>string</code> | the url to be pinged |
+
 <a name="SpeedTest"></a>
 ## SpeedTest
 Class in charge of make Speed Tests
@@ -341,3 +352,4 @@ startSpeedTest - start the speed test
 | Param | Type | Description |
 | --- | --- | --- |
 | onprogress | <code>function</code> | on progress function |
+
