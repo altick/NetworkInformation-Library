@@ -18,7 +18,6 @@ function NetworkInformation(){
   this.currentOs = "Unknown";
   this.networkType = "Unknown";
   this.coordinates = [0, 0];
-  this.pings = [];
 
   /**
   * getGoogleInfo - receive the data from google and set in the internal vars
@@ -367,76 +366,6 @@ function NetworkInformation(){
     return os;
   }
 
-  /**
-  * ping - ping to a url. WARNING: THIS REQUIRED A SERVER TO CHECK IF A URL REALLY EXISTS.
-  *
-  * @memberof! NetworkInformation
-  * @param {string} url the url to be pinged
-  * @return {undefined}
-  */
-  this.ping = function(url){
-    var loop_iter = 4;
-    var max_iter = 5;
-    var loop_time = 1000;
-    var counter = 0;
-    var flag = 0;
-    var total_time = 0;
-    var timeout = 9000;
-    var timeout_error = 0;
-    var selfNetwork = this;
-
-    var loop = setInterval(function(){
-      _url = "http://" + url + "/" + Date.now() + Math.random().toString(36).substring(7);
-
-      if(counter < max_iter){
-        var ping = new XMLHttpRequest();
-
-        counter ++;
-        ping.seq = counter;
-        flag++;
-
-        ping.start_time = Date.now();
-        ping.timeout = timeout;
-        ping.onreadystatechange = function(){
-          if (ping.readyState == 4 && timeout_error == 0) {
-            flag--;
-            if (ping.seq > 1) {
-              delta_time = Date.now() - ping.start_time;
-              total_time += delta_time;
-            }
-          }
-        }
-        ping.ontimeout = function(){
-          timeout_error = 1;
-        }
-        ping.open("GET", _url, true);
-        ping.send();
-      }
-
-      if ((counter > loop_iter) && (flag < 1)) {
-            clearInterval(loop);
-            var avg_time = Math.round(total_time / (counter - 1));
-            var ping_object = new function(){
-              this.time = avg_time;
-              this.status = "SUCCESS";
-              this.url = _url;
-            }
-            selfNetwork.pings.push(ping_object);
-
-        }
-        if (timeout_error == 1) {
-            clearInterval(loop);
-            var ping_object = new function(){
-              this.time = 0;
-              this.status = "FAILED";
-              this.url = _url;
-            }
-            selfNetwork.pings.push(ping_object);
-            return;
-
-        }
-    }, loop_time);
-  }
 
   this.currentOs = this.getOS();
   this.networkType = this.checkConnectionType();
