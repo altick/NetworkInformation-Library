@@ -17,6 +17,9 @@ The original files are NI.js who uses javascript classes. His successor was NI-a
 <dt><a href="#SpeedTest">SpeedTest</a></dt>
 <dd><p>Class in charge of make Speed Tests</p>
 </dd>
+<dt><a href="#NetworkUtilities">NetworkUtilities</a></dt>
+<dd><p>Class with network utilities, as ping method. WARNING: This class is experimental, the methods contained here probably require a server.</p>
+</dd>
 </dl>
 
 <a name="Heimdal"></a>
@@ -111,7 +114,6 @@ Class who get the information of the client network
     * [.isMobile()](#NetworkInformation.isMobile) ⇒ <code>boolean</code>
     * [.checkConnectionType()](#NetworkInformation.checkConnectionType) ⇒ <code>string</code>
     * [.getOS()](#NetworkInformation.getOS) ⇒ <code>string</code>
-    * [.ping(url)](#NetworkInformation.ping) ⇒ <code>undefined</code>
 
 <a name="new_NetworkInformation_new"></a>
 ### new NetworkInformation()
@@ -272,16 +274,6 @@ getOS - Get the OS of the client
 
 **Kind**: static method of <code>[NetworkInformation](#NetworkInformation)</code>  
 **Returns**: <code>string</code> - Operative System  
-<a name="NetworkInformation.ping"></a>
-### NetworkInformation.ping(url) ⇒ <code>undefined</code>
-ping - ping to a url. WARNING: THIS REQUIRED A SERVER TO CHECK IF A URL REALLY EXISTS.
-
-**Kind**: static method of <code>[NetworkInformation](#NetworkInformation)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| url | <code>string</code> | the url to be pinged |
-
 <a name="SpeedTest"></a>
 ## SpeedTest
 Class in charge of make Speed Tests
@@ -352,4 +344,59 @@ startSpeedTest - start the speed test
 | Param | Type | Description |
 | --- | --- | --- |
 | onprogress | <code>function</code> | on progress function |
+
+<a name="NetworkUtilities"></a>
+## NetworkUtilities
+Class with network utilities, as ping method. WARNING: This class is experimental, the methods contained here probably require a server.
+
+**Kind**: global class  
+
+* [NetworkUtilities](#NetworkUtilities)
+    * [new NetworkUtilities()](#new_NetworkUtilities_new)
+    * [.ping(url, callback)](#NetworkUtilities.ping) ⇒ <code>undefined</code>
+    * [.getPings()](#NetworkUtilities.getPings) ⇒ <code>Array</code>
+    * [.pingTops(callback)](#NetworkUtilities.pingTops) ⇒ <code>undefined</code>
+    * [.checkNAT(url, callback)](#NetworkUtilities.checkNAT) ⇒ <code>undefined</code>
+
+<a name="new_NetworkUtilities_new"></a>
+### new NetworkUtilities()
+NetworkUtilities - Class with network utilities, as ping method. WARNING: This class is experimental, the methods contained here probably require a server.
+
+<a name="NetworkUtilities.ping"></a>
+### NetworkUtilities.ping(url, callback) ⇒ <code>undefined</code>
+ping - ping to a url. WARNING: THIS REQUIRED A SERVER TO CHECK IF A URL REALLY EXISTS. OTHERWISE THE PING SUCCESS WITH FALSE POSITIVE.
+
+**Kind**: static method of <code>[NetworkUtilities](#NetworkUtilities)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| url | <code>string</code> | the url to be pinged |
+| callback | <code>function</code> | Callback function when the specific ping as done. Receive a ping object with the time, the status and the url. |
+
+<a name="NetworkUtilities.getPings"></a>
+### NetworkUtilities.getPings() ⇒ <code>Array</code>
+getPings - Get an array with pings.
+
+**Kind**: static method of <code>[NetworkUtilities](#NetworkUtilities)</code>  
+**Returns**: <code>Array</code> - Pings  
+<a name="NetworkUtilities.pingTops"></a>
+### NetworkUtilities.pingTops(callback) ⇒ <code>undefined</code>
+pingTops - Make a ping to TOP_CL urls
+
+**Kind**: static method of <code>[NetworkUtilities](#NetworkUtilities)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| callback | <code>function</code> | The callback function when the proccess finish. |
+
+<a name="NetworkUtilities.checkNAT"></a>
+### NetworkUtilities.checkNAT(url, callback) ⇒ <code>undefined</code>
+checkNAT - Send a request to a specific server to check if the client is behind NAT. With callback function.
+
+**Kind**: static method of <code>[NetworkUtilities](#NetworkUtilities)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| url | <code>string</code> | The url of the server. |
+| callback | <code>function</code> | The callback function. Receive server answer as param. |
 
