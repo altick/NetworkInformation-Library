@@ -104,6 +104,26 @@ function NetworkUtilities(){
     }
 
     /**
+     * pingTops - Make a ping to TOP_CL urls
+     *
+     * @memberof! NetworkUtilities
+     * @param {function} callback The callback function when the proccess finish.
+     * @return {undefined}
+     */
+     this.pingTops = function(callback){
+       var top_length = TOP_CL.length;
+       var selfUtilities = this;
+       function triggerCallback(ping){
+         if(selfUtilities.pings.length == top_length){
+           callback();
+         }
+       }
+       for(_url in TOP_CL){
+         this.ping(TOP_CL[_url], triggerCallback);
+       }
+     }
+
+    /**
      * checkNAT - Send a request to a specific server to check if the client is behind NAT. With callback function.
      *
      * @memberof! NetworkUtilities
