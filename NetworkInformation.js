@@ -103,7 +103,7 @@ function NetworkInformation(){
         selfNetwork.ipApiInformation = data;
         callbackfunction();
       }
-      $.getJSON("http://ip-api.com/json/?callback=?&lang=es&fields=262111", setData);
+      $.getJSON(IP_API_URL, setData);
     }
 
 
