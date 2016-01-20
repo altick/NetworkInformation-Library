@@ -14,11 +14,11 @@ The original files are NI.js who uses javascript classes. His successor was NI-a
 <dt><a href="#NetworkInformation">NetworkInformation</a></dt>
 <dd><p>Class who get the information of the client network</p>
 </dd>
-<dt><a href="#SpeedTest">SpeedTest</a></dt>
-<dd><p>Class in charge of make Speed Tests</p>
-</dd>
 <dt><a href="#NetworkUtilities">NetworkUtilities</a></dt>
 <dd><p>Class with network utilities, as ping method. WARNING: This class is experimental, the methods contained here probably require a server.</p>
+</dd>
+<dt><a href="#SpeedTest">SpeedTest</a></dt>
+<dd><p>Class in charge of make Speed Tests</p>|
 </dd>
 </dl>
 
@@ -33,8 +33,10 @@ Main class who administrate the use of NetworkInformation & SpeedTest classes
     * [.init(callback)](#Heimdal.init) ⇒ <code>undefined</code>
     * [.runTest(on, file)](#Heimdal.runTest) ⇒ <code>undefined</code>
     * [.sendData()](#Heimdal.sendData) ⇒ <code>undefined</code>
+    * [.pingTest(callback)](#Heimdal.pingTest) ⇒ <code>undefined</code>
     * [.getNetworkInfo()](#Heimdal.getNetworkInfo) ⇒ <code>[NetworkInformation](#NetworkInformation)</code>
     * [.getSpeedTests()](#Heimdal.getSpeedTests) ⇒ <code>[SpeedTest](#SpeedTest)</code>
+    * [.getUtilities()](#Heimdal.getUtilities) ⇒ <code>[NetworkUtilities](#NetworkUtilities)</code>
 
 <a name="new_Heimdal_new"></a>
 ### new Heimdal(server)
@@ -72,6 +74,16 @@ runTest - Start the Speed test
 sendData - Send all the data to the server
 
 **Kind**: static method of <code>[Heimdal](#Heimdal)</code>  
+<a name="Heimdal.pingTest"></a>
+### Heimdal.pingTest(callback) ⇒ <code>undefined</code>
+pingTest - Start the ping test to top sites
+
+**Kind**: static method of <code>[Heimdal](#Heimdal)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| callback | <code>function</code> | The callback function when the ping test was ready. |
+
 <a name="Heimdal.getNetworkInfo"></a>
 ### Heimdal.getNetworkInfo() ⇒ <code>[NetworkInformation](#NetworkInformation)</code>
 getNetworkInfo - Return the NetworkInformation object
@@ -84,6 +96,12 @@ getSpeedTests - Return the SpeedTest object
 
 **Kind**: static method of <code>[Heimdal](#Heimdal)</code>  
 **Returns**: <code>[SpeedTest](#SpeedTest)</code> - Inner SpeedTest object  
+<a name="Heimdal.getUtilities"></a>
+### Heimdal.getUtilities() ⇒ <code>[NetworkUtilities](#NetworkUtilities)</code>
+getUtilities - Return the NetworkUtilities object
+
+**Kind**: static method of <code>[Heimdal](#Heimdal)</code>  
+**Returns**: <code>[NetworkUtilities](#NetworkUtilities)</code> - Inner NetworkUtilities object  
 <a name="NetworkInformation"></a>
 ## NetworkInformation
 Class who get the information of the client network
@@ -274,6 +292,61 @@ getOS - Get the OS of the client
 
 **Kind**: static method of <code>[NetworkInformation](#NetworkInformation)</code>  
 **Returns**: <code>string</code> - Operative System  
+<a name="NetworkUtilities"></a>
+## NetworkUtilities
+Class with network utilities, as ping method. WARNING: This class is experimental, the methods contained here probably require a server.
+
+**Kind**: global class  
+
+* [NetworkUtilities](#NetworkUtilities)
+    * [new NetworkUtilities()](#new_NetworkUtilities_new)
+    * [.ping(url, callback)](#NetworkUtilities.ping) ⇒ <code>undefined</code>
+    * [.getPings()](#NetworkUtilities.getPings) ⇒ <code>Array</code>
+    * [.pingTops(callback)](#NetworkUtilities.pingTops) ⇒ <code>undefined</code>
+    * [.checkNAT(url, callback)](#NetworkUtilities.checkNAT) ⇒ <code>undefined</code>
+
+<a name="new_NetworkUtilities_new"></a>
+### new NetworkUtilities()
+NetworkUtilities - Class with network utilities, as ping method. WARNING: This class is experimental, the methods contained here probably require a server.
+
+<a name="NetworkUtilities.ping"></a>
+### NetworkUtilities.ping(url, callback) ⇒ <code>undefined</code>
+ping - ping to a url. WARNING: THIS REQUIRED A SERVER TO CHECK IF A URL REALLY EXISTS. OTHERWISE THE PING SUCCESS WITH FALSE POSITIVE.
+
+**Kind**: static method of <code>[NetworkUtilities](#NetworkUtilities)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| url | <code>string</code> | the url to be pinged |
+| callback | <code>function</code> | Callback function when the specific ping as done. Receive a ping object with the time, the status and the url. |
+
+<a name="NetworkUtilities.getPings"></a>
+### NetworkUtilities.getPings() ⇒ <code>Array</code>
+getPings - Get an array with pings.
+
+**Kind**: static method of <code>[NetworkUtilities](#NetworkUtilities)</code>  
+**Returns**: <code>Array</code> - Pings  
+<a name="NetworkUtilities.pingTops"></a>
+### NetworkUtilities.pingTops(callback) ⇒ <code>undefined</code>
+pingTops - Make a ping to TOP_CL urls
+
+**Kind**: static method of <code>[NetworkUtilities](#NetworkUtilities)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| callback | <code>function</code> | The callback function when the proccess finish. |
+
+<a name="NetworkUtilities.checkNAT"></a>
+### NetworkUtilities.checkNAT(url, callback) ⇒ <code>undefined</code>
+checkNAT - Send a request to a specific server to check if the client is behind NAT. With callback function.
+
+**Kind**: static method of <code>[NetworkUtilities](#NetworkUtilities)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| url | <code>string</code> | The url of the server. |
+| callback | <code>function</code> | The callback function. Receive server answer as param. |
+
 <a name="SpeedTest"></a>
 ## SpeedTest
 Class in charge of make Speed Tests
@@ -344,59 +417,3 @@ startSpeedTest - start the speed test
 | Param | Type | Description |
 | --- | --- | --- |
 | onprogress | <code>function</code> | on progress function |
-
-<a name="NetworkUtilities"></a>
-## NetworkUtilities
-Class with network utilities, as ping method. WARNING: This class is experimental, the methods contained here probably require a server.
-
-**Kind**: global class  
-
-* [NetworkUtilities](#NetworkUtilities)
-    * [new NetworkUtilities()](#new_NetworkUtilities_new)
-    * [.ping(url, callback)](#NetworkUtilities.ping) ⇒ <code>undefined</code>
-    * [.getPings()](#NetworkUtilities.getPings) ⇒ <code>Array</code>
-    * [.pingTops(callback)](#NetworkUtilities.pingTops) ⇒ <code>undefined</code>
-    * [.checkNAT(url, callback)](#NetworkUtilities.checkNAT) ⇒ <code>undefined</code>
-
-<a name="new_NetworkUtilities_new"></a>
-### new NetworkUtilities()
-NetworkUtilities - Class with network utilities, as ping method. WARNING: This class is experimental, the methods contained here probably require a server.
-
-<a name="NetworkUtilities.ping"></a>
-### NetworkUtilities.ping(url, callback) ⇒ <code>undefined</code>
-ping - ping to a url. WARNING: THIS REQUIRED A SERVER TO CHECK IF A URL REALLY EXISTS. OTHERWISE THE PING SUCCESS WITH FALSE POSITIVE.
-
-**Kind**: static method of <code>[NetworkUtilities](#NetworkUtilities)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| url | <code>string</code> | the url to be pinged |
-| callback | <code>function</code> | Callback function when the specific ping as done. Receive a ping object with the time, the status and the url. |
-
-<a name="NetworkUtilities.getPings"></a>
-### NetworkUtilities.getPings() ⇒ <code>Array</code>
-getPings - Get an array with pings.
-
-**Kind**: static method of <code>[NetworkUtilities](#NetworkUtilities)</code>  
-**Returns**: <code>Array</code> - Pings  
-<a name="NetworkUtilities.pingTops"></a>
-### NetworkUtilities.pingTops(callback) ⇒ <code>undefined</code>
-pingTops - Make a ping to TOP_CL urls
-
-**Kind**: static method of <code>[NetworkUtilities](#NetworkUtilities)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| callback | <code>function</code> | The callback function when the proccess finish. |
-
-<a name="NetworkUtilities.checkNAT"></a>
-### NetworkUtilities.checkNAT(url, callback) ⇒ <code>undefined</code>
-checkNAT - Send a request to a specific server to check if the client is behind NAT. With callback function.
-
-**Kind**: static method of <code>[NetworkUtilities](#NetworkUtilities)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| url | <code>string</code> | The url of the server. |
-| callback | <code>function</code> | The callback function. Receive server answer as param. |
-
