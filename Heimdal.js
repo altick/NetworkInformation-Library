@@ -1,5 +1,5 @@
 /**
-* @file Class who use {@link NetworkInformation} and {@link SpeedTest} to collect and analyse client network data.
+* @file Class who use {@link NetworkInformation}, {@link NetworkUtilities}  and {@link SpeedTest} to collect and analyse client network data.
 * @author [Michel Llorens]{@link http://michotastico.github.io}
 * @version 1.0.0
 * @license MIT
@@ -16,6 +16,7 @@
 function Heimdal(server){
   this.server_url = server || 'http://localhost/';
   this.network_info = new NetworkInformation();
+  this.network_utilities = new NetworkUtilities();
   this.speed_test = [];
   this.time = Date.now();
 
@@ -69,6 +70,17 @@ function Heimdal(server){
     });
   }
 
+  /**
+   * pingTest - Start the ping test to top sites
+   *
+   * @memberof! Heimdal
+   * @param  {function} callback The callback function when the ping test was ready.
+   * @return {undefined}
+   */
+  this.pingTest = function(callback){
+    this.network_utilities.pingTops(callback);
+  }
+
 
   /**
    * getNetworkInfo - Return the NetworkInformation object
@@ -87,6 +99,15 @@ function Heimdal(server){
    */
   this.getSpeedTests = function(){
     return this.speed_test;
+  }
+
+  /**
+   * getUtilities - Return the NetworkUtilities object
+   * @memberof! Heimdal
+   * @return {NetworkUtilities}  Inner NetworkUtilities object
+   */
+  this.getUtilities = function(){
+    return this.network_utilities;
   }
 
 }
