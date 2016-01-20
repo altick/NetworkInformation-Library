@@ -23,11 +23,14 @@ function NetworkInformation(){
   * getGoogleInfo - receive the data from google and set in the internal vars
   *
   * @memberof! NetworkInformation
+  * @param  {function} tail The tail function.
+  * @param  {function} callback The callback function.
   * @param  {number} lat latitude
   * @param  {number} lon longitude
   * @return {undefined}
   */
-  this.getGoogleInfo = function(lat, lon){
+  this.getGoogleInfo = function(tail, callback, lat, lon){
+    var wasCalled = false;
     try{
       var geocoder;
       geocoder = new google.maps.Geocoder();
@@ -43,11 +46,15 @@ function NetworkInformation(){
               selfNetwork.googleInformation = value;
             }
           }
+          wasCalled = true;
+          tail(callback);
         }
       );
     }
     catch(err){
-      ;
+      if(!wasCalled){
+        tail(callback);
+      }
     }
   }
 
@@ -72,9 +79,11 @@ function NetworkInformation(){
       var success = function(data){
         selfNetwork.coordinates = [data.coords.latitude, data.coords.longitude];
         if(selfNetwork.coordinates[0] != 0 && selfNetwork.coordinates[1] != 0){
-          selfNetwork.getGoogleInfo(data.coords.latitude, data.coords.longitude);
+          selfNetwork.getGoogleInfo(tail_method, callbackfunction, data.coords.latitude, data.coords.longitude);
         }
-        tail_method(callbackfunction);
+        else {
+          tail_method(callbackfunction);
+        }
       }
       var failure = function(data){
         tail_method(callbackfunction);
