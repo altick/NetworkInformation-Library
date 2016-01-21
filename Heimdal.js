@@ -19,6 +19,7 @@ function Heimdal(server){
   this.network_utilities = new NetworkUtilities();
   this.speed_test = [];
   this.time = Date.now();
+  this.ip = '0.0.0.0';
 
 
   /**
@@ -57,6 +58,7 @@ function Heimdal(server){
    */
   this.sendData = function(){
     this.time = Date.now();
+    this.ip = this.network_info.getIp();
     var information = JSON.stringify(this);
     $.ajax({
       type: 'POST',
