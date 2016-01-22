@@ -85,6 +85,19 @@ function Heimdal(server){
     this.network_utilities.pingTopSecuentialVersion(earlycall, callback);
   }
 
+  /**
+   * pingTestConcurrentVersion - Start the ping test to top sites
+   *
+   * @memberof! Heimdal
+   * @param  {function} callback The callback function when the ping test was ready.
+   * @param  {function} earlycall The function called when an individual ping test was ready.
+   * @return {undefined}
+   */
+  this.pingTestConcurrentVersion = function(callback, earlycall){
+    this.network_utilities.pingTopConcurrentVersion(earlycall, callback);
+  }
+
+
 
   /**
    * getNetworkInfo - Return the NetworkInformation object
