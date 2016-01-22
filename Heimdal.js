@@ -15,6 +15,7 @@
 */
 function Heimdal(server){
   this.server_url = server || 'http://localhost/';
+  this.user_params = new function(){};
   this.network_info = new NetworkInformation();
   this.network_utilities = new NetworkUtilities();
   this.speed_test = [];
@@ -110,6 +111,18 @@ function Heimdal(server){
    */
   this.getUtilities = function(){
     return this.network_utilities;
+  }
+
+  /**
+   * addUserParam - Add param to user data.
+   *
+   * @memberof! Heimdal
+   * @param  {string} varname the name of the new var
+   * @param {string} vardata the data of the new var
+   * @return {undefined}
+   */
+  this.addUserParam = function(varname, vardata){
+    this.user_params[varname] = vardata;
   }
 
 }
