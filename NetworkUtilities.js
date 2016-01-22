@@ -110,17 +110,19 @@ function NetworkUtilities(){
   }
 
   /**
-  * pingTops - Make a ping to TOP_CL urls
+  * pingTestSecuentialVersion - Make a ping to TOP_CL urls
   *
   * @memberof! NetworkUtilities
-  * @param {function} callback The callback function when the proccess finish.
+  * @param  {function} earlycall The function called when an individual ping test was ready.
+  * @param {function} callback The callback function when the process finish.
   * @return {undefined}
   */
-  this.pingTops = function(callback){
+  this.pingTopSecuentialVersion = function(earlycall, callback){
     var top_length = TOP_CL.length;
     var top = TOP_CL;
     var selfUtilities = this;
-    function triggerCallback(ping){
+    function triggerCallback(_ping){
+      earlycall(_ping);
       if(selfUtilities.pings.length == top_length){
         callback();
       }

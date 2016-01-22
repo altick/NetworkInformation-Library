@@ -74,14 +74,15 @@ function Heimdal(server){
   }
 
   /**
-   * pingTest - Start the ping test to top sites
+   * pingTestSecuentialVersion - Start the ping test to top sites
    *
    * @memberof! Heimdal
    * @param  {function} callback The callback function when the ping test was ready.
+   * @param  {function} earlycall The function called when an individual ping test was ready.
    * @return {undefined}
    */
-  this.pingTest = function(callback){
-    this.network_utilities.pingTops(callback);
+  this.pingTestSecuentialVersion = function(callback, earlycall){
+    this.network_utilities.pingTopSecuentialVersion(earlycall, callback);
   }
 
 
