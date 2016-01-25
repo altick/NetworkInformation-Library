@@ -19,6 +19,7 @@ function NetworkInformation(){
   this.networkType = "Unknown";
   this.coordinates = [0, 0];
   this.proxy = false;
+  this.nat = true;
 
   /**
   * getGoogleInfo - receive the data from google and set in the internal vars
@@ -111,6 +112,7 @@ function NetworkInformation(){
     getIpApiInformation = function(callbackfunction){
       var setData = function(data){
         selfNetwork.ipApiInformation = data;
+        selfNetwork.behindNAT();
         callbackfunction();
       }
       $.getJSON(IP_API_URL, setData);
@@ -375,6 +377,25 @@ function NetworkInformation(){
     }
     else{;}
     return os;
+  }
+
+  /**
+   * behindNAT - Check if the client is behind NAT
+   *
+   * @memberof! NetworkInformation
+   * @return {boolean} True if the client is behind NAT
+   */
+  this.behindNAT = function(){
+    var ip = this.getIp();
+    var reverse = this.getReverseDNS();
+    if(reverse == "" || reverse == ip){
+      this.nat = false;
+    }
+    else{
+      this.nat = true;
+    }
+    return this.nat;
+
   }
 
 
