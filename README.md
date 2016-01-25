@@ -18,7 +18,7 @@ The original files are NI.js who uses javascript classes. His successor was NI-a
 <dd><p>Class with network utilities, as ping method. WARNING: This class is experimental, the methods contained here probably require a server.</p>
 </dd>
 <dt><a href="#SpeedTest">SpeedTest</a></dt>
-<dd><p>Class in charge of make Speed Tests</p>|
+<dd><p>Class in charge of make Speed Tests</p>
 </dd>
 </dl>
 
@@ -33,10 +33,12 @@ Main class who administrate the use of NetworkInformation & SpeedTest classes
     * [.init(callback)](#Heimdal.init) ⇒ <code>undefined</code>
     * [.runTest(on, file)](#Heimdal.runTest) ⇒ <code>undefined</code>
     * [.sendData()](#Heimdal.sendData) ⇒ <code>undefined</code>
-    * [.pingTest(callback)](#Heimdal.pingTest) ⇒ <code>undefined</code>
+    * [.pingTestSecuentialVersion(callback, earlycall)](#Heimdal.pingTestSecuentialVersion) ⇒ <code>undefined</code>
+    * [.pingTestConcurrentVersion(callback, earlycall)](#Heimdal.pingTestConcurrentVersion) ⇒ <code>undefined</code>
     * [.getNetworkInfo()](#Heimdal.getNetworkInfo) ⇒ <code>[NetworkInformation](#NetworkInformation)</code>
     * [.getSpeedTests()](#Heimdal.getSpeedTests) ⇒ <code>[SpeedTest](#SpeedTest)</code>
     * [.getUtilities()](#Heimdal.getUtilities) ⇒ <code>[NetworkUtilities](#NetworkUtilities)</code>
+    * [.addUserParam(varname, vardata)](#Heimdal.addUserParam) ⇒ <code>undefined</code>
 
 <a name="new_Heimdal_new"></a>
 ### new Heimdal(server)
@@ -74,15 +76,27 @@ runTest - Start the Speed test
 sendData - Send all the data to the server
 
 **Kind**: static method of <code>[Heimdal](#Heimdal)</code>  
-<a name="Heimdal.pingTest"></a>
-### Heimdal.pingTest(callback) ⇒ <code>undefined</code>
-pingTest - Start the ping test to top sites
+<a name="Heimdal.pingTestSecuentialVersion"></a>
+### Heimdal.pingTestSecuentialVersion(callback, earlycall) ⇒ <code>undefined</code>
+pingTestSecuentialVersion - Start the ping test to top sites
 
 **Kind**: static method of <code>[Heimdal](#Heimdal)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | callback | <code>function</code> | The callback function when the ping test was ready. |
+| earlycall | <code>function</code> | The function called when an individual ping test was ready. |
+
+<a name="Heimdal.pingTestConcurrentVersion"></a>
+### Heimdal.pingTestConcurrentVersion(callback, earlycall) ⇒ <code>undefined</code>
+pingTestConcurrentVersion - Start the ping test to top sites
+
+**Kind**: static method of <code>[Heimdal](#Heimdal)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| callback | <code>function</code> | The callback function when the ping test was ready. |
+| earlycall | <code>function</code> | The function called when an individual ping test was ready. |
 
 <a name="Heimdal.getNetworkInfo"></a>
 ### Heimdal.getNetworkInfo() ⇒ <code>[NetworkInformation](#NetworkInformation)</code>
@@ -102,6 +116,17 @@ getUtilities - Return the NetworkUtilities object
 
 **Kind**: static method of <code>[Heimdal](#Heimdal)</code>  
 **Returns**: <code>[NetworkUtilities](#NetworkUtilities)</code> - Inner NetworkUtilities object  
+<a name="Heimdal.addUserParam"></a>
+### Heimdal.addUserParam(varname, vardata) ⇒ <code>undefined</code>
+addUserParam - Add param to user data.
+
+**Kind**: static method of <code>[Heimdal](#Heimdal)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| varname | <code>string</code> | the name of the new var |
+| vardata | <code>string</code> | the data of the new var |
+
 <a name="NetworkInformation"></a>
 ## NetworkInformation
 Class who get the information of the client network
@@ -110,7 +135,7 @@ Class who get the information of the client network
 
 * [NetworkInformation](#NetworkInformation)
     * [new NetworkInformation()](#new_NetworkInformation_new)
-    * [.getGoogleInfo(lat, lon)](#NetworkInformation.getGoogleInfo) ⇒ <code>undefined</code>
+    * [.getGoogleInfo(tail, callback, lat, lon)](#NetworkInformation.getGoogleInfo) ⇒ <code>undefined</code>
     * [.setInformation(readyMethod)](#NetworkInformation.setInformation) ⇒ <code>undefined</code>
         * [~getHtml5Geolocation(tail_method, callbackfunction)](#NetworkInformation.setInformation..getHtml5Geolocation) ⇒ <code>undefined</code>
         * [~getIpApiInformation(callbackfunction)](#NetworkInformation.setInformation..getIpApiInformation) ⇒ <code>undefined</code>
@@ -138,13 +163,15 @@ Class who get the information of the client network
 NetworkInformation - Class who get the information of the client network
 
 <a name="NetworkInformation.getGoogleInfo"></a>
-### NetworkInformation.getGoogleInfo(lat, lon) ⇒ <code>undefined</code>
+### NetworkInformation.getGoogleInfo(tail, callback, lat, lon) ⇒ <code>undefined</code>
 getGoogleInfo - receive the data from google and set in the internal vars
 
 **Kind**: static method of <code>[NetworkInformation](#NetworkInformation)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
+| tail | <code>function</code> | The tail function. |
+| callback | <code>function</code> | The callback function. |
 | lat | <code>number</code> | latitude |
 | lon | <code>number</code> | longitude |
 
@@ -302,7 +329,8 @@ Class with network utilities, as ping method. WARNING: This class is experimenta
     * [new NetworkUtilities()](#new_NetworkUtilities_new)
     * [.ping(url, callback)](#NetworkUtilities.ping) ⇒ <code>undefined</code>
     * [.getPings()](#NetworkUtilities.getPings) ⇒ <code>Array</code>
-    * [.pingTops(callback)](#NetworkUtilities.pingTops) ⇒ <code>undefined</code>
+    * [.pingTopSecuentialVersion(earlycall, callback)](#NetworkUtilities.pingTopSecuentialVersion) ⇒ <code>undefined</code>
+    * [.pingTopConcurrentVersion(earlycall, callback)](#NetworkUtilities.pingTopConcurrentVersion) ⇒ <code>undefined</code>
     * [.checkNAT(url, callback)](#NetworkUtilities.checkNAT) ⇒ <code>undefined</code>
 
 <a name="new_NetworkUtilities_new"></a>
@@ -326,15 +354,27 @@ getPings - Get an array with pings.
 
 **Kind**: static method of <code>[NetworkUtilities](#NetworkUtilities)</code>  
 **Returns**: <code>Array</code> - Pings  
-<a name="NetworkUtilities.pingTops"></a>
-### NetworkUtilities.pingTops(callback) ⇒ <code>undefined</code>
-pingTops - Make a ping to TOP_CL urls
+<a name="NetworkUtilities.pingTopSecuentialVersion"></a>
+### NetworkUtilities.pingTopSecuentialVersion(earlycall, callback) ⇒ <code>undefined</code>
+pingTestSecuentialVersion - Make a secuencial ping to TOP_CL urls
 
 **Kind**: static method of <code>[NetworkUtilities](#NetworkUtilities)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| callback | <code>function</code> | The callback function when the proccess finish. |
+| earlycall | <code>function</code> | The function called when an individual ping test was ready. |
+| callback | <code>function</code> | The callback function when the process finish. |
+
+<a name="NetworkUtilities.pingTopConcurrentVersion"></a>
+### NetworkUtilities.pingTopConcurrentVersion(earlycall, callback) ⇒ <code>undefined</code>
+pingTestConcurrentVersion - Make a concurrent ping to TOP_CL urls
+
+**Kind**: static method of <code>[NetworkUtilities](#NetworkUtilities)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| earlycall | <code>function</code> | The function called when an individual ping test was ready. |
+| callback | <code>function</code> | The callback function when the process finish. |
 
 <a name="NetworkUtilities.checkNAT"></a>
 ### NetworkUtilities.checkNAT(url, callback) ⇒ <code>undefined</code>
@@ -417,3 +457,4 @@ startSpeedTest - start the speed test
 | Param | Type | Description |
 | --- | --- | --- |
 | onprogress | <code>function</code> | on progress function |
+
