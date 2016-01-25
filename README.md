@@ -157,6 +157,7 @@ Class who get the information of the client network
     * [.isMobile()](#NetworkInformation.isMobile) ⇒ <code>boolean</code>
     * [.checkConnectionType()](#NetworkInformation.checkConnectionType) ⇒ <code>string</code>
     * [.getOS()](#NetworkInformation.getOS) ⇒ <code>string</code>
+    * [.behindNAT()](#NetworkInformation.behindNAT) ⇒ <code>boolean</code>
 
 <a name="new_NetworkInformation_new"></a>
 ### new NetworkInformation()
@@ -319,6 +320,12 @@ getOS - Get the OS of the client
 
 **Kind**: static method of <code>[NetworkInformation](#NetworkInformation)</code>  
 **Returns**: <code>string</code> - Operative System  
+<a name="NetworkInformation.behindNAT"></a>
+### NetworkInformation.behindNAT() ⇒ <code>boolean</code>
+behindNAT - Check if the client is behind NAT
+
+**Kind**: static method of <code>[NetworkInformation](#NetworkInformation)</code>  
+**Returns**: <code>boolean</code> - True if the client is behind NAT  
 <a name="NetworkUtilities"></a>
 ## NetworkUtilities
 Class with network utilities, as ping method. WARNING: This class is experimental, the methods contained here probably require a server.
