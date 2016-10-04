@@ -79,10 +79,11 @@ function Heimdal(server){
    * @memberof! Heimdal
    * @param  {function} callback The callback function when the ping test was ready.
    * @param  {function} earlycall The function called when an individual ping test was ready.
+   * @param  {array} array with the urls to evaluate.
    * @return {undefined}
    */
-  this.pingTestSecuentialVersion = function(callback, earlycall){
-    this.network_utilities.pingTopSecuentialVersion(earlycall, callback);
+  this.pingTestSecuentialVersion = function(callback, earlycall, top_sites){
+    this.network_utilities.pingTopSecuentialVersion(earlycall, callback, top_sites);
   }
 
   /**
@@ -91,10 +92,11 @@ function Heimdal(server){
    * @memberof! Heimdal
    * @param  {function} callback The callback function when the ping test was ready.
    * @param  {function} earlycall The function called when an individual ping test was ready.
+   * @param  {array} array with the urls to evaluate.
    * @return {undefined}
    */
-  this.pingTestConcurrentVersion = function(callback, earlycall){
-    this.network_utilities.pingTopConcurrentVersion(earlycall, callback);
+  this.pingTestConcurrentVersion = function(callback, earlycall, top_sites){
+    this.network_utilities.pingTopConcurrentVersion(earlycall, callback, top_sites);
   }
 
 

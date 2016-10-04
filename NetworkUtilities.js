@@ -110,16 +110,16 @@ function NetworkUtilities(){
   }
 
   /**
-  * pingTestSecuentialVersion - Make a secuencial ping to TOP_CL urls
+  * pingTestSecuentialVersion - Make a secuencial ping to top_sites urls
   *
   * @memberof! NetworkUtilities
   * @param  {function} earlycall The function called when an individual ping test was ready.
   * @param {function} callback The callback function when the process finish.
   * @return {undefined}
   */
-  this.pingTopSecuentialVersion = function(earlycall, callback){
-    var top_length = TOP_CL.length;
-    var top = TOP_CL;
+  this.pingTopSecuentialVersion = function(earlycall, callback, top_sites){
+    var top_length = top_sites.length;
+    var top = top_sites;
     var selfUtilities = this;
     function triggerCallback(_ping){
       earlycall(_ping);
@@ -134,15 +134,16 @@ function NetworkUtilities(){
   }
 
   /**
-   * pingTestConcurrentVersion - Make a concurrent ping to TOP_CL urls
+   * pingTestConcurrentVersion - Make a concurrent ping to top_sites urls
    *
    * @memberof! NetworkUtilities
    * @param  {function} earlycall The function called when an individual ping test was ready.
    * @param {function} callback The callback function when the process finish.
    * @return {undefined}
    */
-  this.pingTopConcurrentVersion = function(earlycall, callback){
-    var top_length = TOP_CL.length;
+  this.pingTopConcurrentVersion = function(earlycall, callback, top_sites){
+    top_sites = top_sites.toArray();
+    var top_length = top_sites.length;
     var selfUtilities = this;
     function triggerCallback(_ping){
       earlycall(_ping);
@@ -150,8 +151,8 @@ function NetworkUtilities(){
         callback();
       }
     }
-    for(_url in TOP_CL){
-      this.ping(TOP_CL[_url], triggerCallback);
+    for(_url in top_sites){
+      this.ping(top_sites[_url], triggerCallback);
     }
   }
 
